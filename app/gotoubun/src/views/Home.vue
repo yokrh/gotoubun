@@ -1,18 +1,78 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- 五等分の花嫁 -->
+  <div style="padding:0 2%; min-height:100%; background-color:#e87e9e11;">
+    <!-- タイトル -->
+    <h1 style="margin:0; padding:24px 0; font-size:32px;">
+      五等分の花嫁
+      <span style="display:block; font-size:24px;">イラスト検索</span>
+    </h1>
+    <p style="padding:0 4%; font-size:14px;">
+      <a href="https://twitter.com/5Hanayome_anime" target="_blank"
+        style="text-decoration:none; color:#3B94D9;">公式twitterアカウント</a>が配信しているイラストをセリフから検索できます。<br/>
+      <span>リストは不定期更新です。だいたい公式のモーメントまとめから追加しています。</span>
+      <span style="font-size:12px;">（そろそろLINEスタンプ欲しい）</span>
+    </p>
+
+    <!-- ワード -->
+    <el-input style="margin:12px 0;"
+      placeholder="セリフを入力してください"
+      v-model="word"
+      @keyup.enter.native="onKeyupEnter">
+    </el-input>
+
+    <!-- キャラ -->
+    <el-radio-group v-model="characterId"
+      style="margin-top:20px;"
+      class="character-radio-group">
+      <el-radio :label="CHARACTER.ALL.ID">{{CHARACTER.ALL.NAME}}</el-radio>
+      <el-radio :label="CHARACTER.ICHIKA.ID">{{CHARACTER.ICHIKA.NAME}}</el-radio>
+      <el-radio :label="CHARACTER.NINO.ID">{{CHARACTER.NINO.NAME}}</el-radio>
+      <el-radio :label="CHARACTER.MIKU.ID">{{CHARACTER.MIKU.NAME}}</el-radio>
+      <el-radio :label="CHARACTER.YOTSUBA.ID">{{CHARACTER.YOTSUBA.NAME}}</el-radio>
+      <el-radio :label="CHARACTER.ITSUKI.ID">{{CHARACTER.ITSUKI.NAME}}</el-radio>
+    </el-radio-group>
+
+    <!-- イラストリスト -->
+    <IllustList :word="word" :characterId="characterId" style="margin-top:20px;"></IllustList>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import CHARACTER from '../models/Character.js';
+import IllustList from '@/components/IllustList.vue'
 
 export default {
-  name: 'home',
   components: {
-    HelloWorld
-  }
+    IllustList,
+  },
+  props: {},
+  data() {
+    return {
+      CHARACTER,
+      word: '',
+      characterId: CHARACTER.ALL.ID,
+    };
+  },
+  computed: {},
+  mounted() {},
+  methods: {
+    onKeyupEnter() {
+      document.activeElement.blur();
+    },
+  },
 }
 </script>
+
+<style scoped>
+@media screen and (max-width:480px) {
+  .character-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0 !important;
+  }
+  .character-radio-group >>> .el-radio {
+    margin: 12px 2%;
+    width: 28%;
+  }
+}
+</style>

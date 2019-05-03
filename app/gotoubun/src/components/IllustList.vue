@@ -1,12 +1,14 @@
 <template>
   <!-- イラストリスト -->
-  <div>
-    <div style="margin-top:40px; font-size:16px;">{{targetIllusts.length}} HIT ! （全{{illusts.length}}件）</div>
+  <div style="padding:20px 0;">
+    <div id="scroll-top" style="margin-top:40px; font-size:16px;">
+      {{targetIllusts.length}} HIT ! （全{{illusts.length}}件）
+    </div>
 
     <template v-if="targetIllusts.length > 0">
       <div style="display:flex; flex-wrap:wrap; margin-top:20px;">
-        <!-- イラスト -->
-        <el-card v-for="illust in targetIllusts" :key="illust.id"
+        <!-- リスト -->
+        <el-card v-for="illust in displayedIllusts" :key="illust.id"
           shadow="always"
           style="margin:12px 0 0 2%; width:30%;"
           :style="{ 'background-color': illust.character.COLOR }"
@@ -20,6 +22,24 @@
             <span style="font-size:12px;">{{illust.quote}}</span>
           </div>
         </el-card>
+
+        <!-- さらに読み込む -->
+        <template v-if="displayedIllusts.length < targetIllusts.length">
+          <el-card :key="'loadmore'"
+            shadow="always"
+            style="margin:12px 0 0 2%; width:30%; min-height:120px;
+              background-color:#12345633; display:flex; align-items:center; justify-content:center;"
+            class="illust-card">
+            <el-button type="primary" @click="loadMore">さらに読み込む</el-button>
+          </el-card>
+        </template>
+
+        <el-button id="scroll-top-button"
+          type="info" round
+          style="margin:60px auto; padding:12px 40px;"
+          @click="scrollTop">
+          ↑ トップに戻る
+        </el-button>
       </div>
     </template>
   </div>
@@ -41,10 +61,20 @@ export default {
   },
   data() {
     return {
-      illusts: [],
+      illusts: [],  // all illusts
+      limit: 10,
+      limitDiff: 10,
     };
   },
+  watch: {
+    word: function() {
+      this.limit = this.limitDiff;
+    },
+  },
   computed: {
+    displayedIllusts() {
+      return this.targetIllusts.slice(0, this.limit);
+    },
     targetIllusts() {
       return this.illusts
         .filter((illust) => {
@@ -73,9 +103,7 @@ export default {
     })
   },
   methods: {
-    /**
-     * fetch quotes
-     */
+    //
     fetchQuotes() {
       const url = 'data/5hanayome/quotes.json'
 
@@ -88,14 +116,30 @@ export default {
           });
       });
     },
+    //
+    loadMore() {
+      this.limit += this.limitDiff;
+      this.limit = Math.min(this.limit, this.targetIllusts.length);
+    },
+    //
+    scrollTop(){
+      document.getElementById('scroll-top').scrollIntoView(false);
+    },
   }
 }
 </script>
 
 <style scoped>
+#scroll-top-button {
+  display: none;
+}
 @media screen and (max-width:480px) {
   .illust-card {
     width: 100% !important;
+  }
+
+  #scroll-top-button {
+    display: block;
   }
 }
 </style>

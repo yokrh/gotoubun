@@ -8,13 +8,14 @@
     </h1>
     <p style="padding:0 4%; font-size:14px;">
       <a href="https://twitter.com/5Hanayome_anime" target="_blank"
-        style="text-decoration:none; color:#3B94D9;">公式twitterアカウント</a>が配信しているイラストをセリフから検索できます。<br/>
-      <span>リストは不定期更新です。だいたい公式のモーメントまとめから追加しています。</span>
-      <span style="font-size:12px;">（そろそろLINEスタンプ欲しい）</span>
+        style="text-decoration:none; color:#3B94D9;">公式twitterアカウント</a>が配信しているイラストをセリフから検索できる非公式サイトです。<br/>
+      <span style="font-size:12px; padding-top:8px;">
+        リストは不定期更新です。だいたい公式のモーメントまとめから追加しています。（そろそろLINEスタンプ欲しい）
+      </span>
     </p>
 
     <!-- ワード -->
-    <el-input style="margin:12px 0;"
+    <el-input style="margin:24px 8%; width:84%;"
       placeholder="セリフを入力してください"
       v-model="word"
       @keyup.enter.native="onKeyupEnter">
@@ -56,6 +57,7 @@ export default {
   computed: {},
   mounted() {},
   methods: {
+    //
     onKeyupEnter() {
       document.activeElement.blur();
     },

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 cd gotoubun/
 npm run build
 cd ../

@@ -96,10 +96,6 @@ export default {
     this.fetchQuotes()
     .then((quotes) => {
       this.illusts = quotes.map(q => new Illust(q));
-
-      // HAS NOT PREPARED IMAGE
-      const END = 5 * 65;
-      this.illusts = this.illusts.slice(0, END);
     })
   },
   methods: {

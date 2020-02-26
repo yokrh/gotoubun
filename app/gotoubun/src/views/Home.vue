@@ -10,7 +10,7 @@
       <a href="https://twitter.com/5Hanayome_anime" target="_blank"
         style="text-decoration:none; color:#3B94D9;">公式twitterアカウント</a>が配信しているイラストをセリフから検索できる非公式サイトです。<br/>
       <span style="font-size:12px; padding-top:8px;">
-        リストは不定期更新です。だいたい公式のモーメントまとめから追加しています。（そろそろLINEスタンプ欲しい）
+        リストは不定期更新です。だいたい公式のモーメントまとめから追加しています。（そろそろ公式LINEスタンプ欲しい → <a href="https://store.line.me/stickershop/product/9131680/ja">きた！</a>）
       </span>
     </p>
 
